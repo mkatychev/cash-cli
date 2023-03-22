@@ -23,7 +23,7 @@ const cash = async command => {
 	const from = command.from.toUpperCase();
 	const to = command.to.filter(item => (item !== from) && !/to/i.test(item)).map(item => item.toUpperCase());
 
-	console.log();
+	
 	const loading = ora({
 		text: 'Converting...',
 		color: 'green',
@@ -48,7 +48,7 @@ const cash = async command => {
 			}
 		});
 
-		console.log(chalk.underline.gray(`\nConversion of ${chalk.bold(from)} ${chalk.bold(amount)}`));
+		
 	}).catch(error => {
 		if (error.code === 'ENOTFOUND') {
 			loading.fail(chalk.red('Please check your internet connection!\n'));
