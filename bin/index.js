@@ -22,25 +22,12 @@ const options = getopts(argv, {
 });
 
 if (options.help) {
-	console.log(`
-	Usage: 
-	  $ cash <amount> <from> <to>
-	  $ cash <options>
-	Options:
-	  --api -a	        				 Configure API source
-	  --save -s <from> <to...>			         Save default currencies
-	  -v, --version                                          Print the version
-	  -h, --help                                             Print this help
-	Examples:
-	  $ cash --api
-	  $ cash 10 usd eur pln
-	  $ cash --save usd eur pln chf
-  `);
+	
 	process.exit(0);
 }
 
 if (options.version) {
-	console.log(require('../package.json').version);
+	
 	process.exit(0);
 }
 
@@ -93,8 +80,8 @@ if (options.api) {
 			await config.set('apiSource', 'https://api.exchangeratesapi.io/latest');
 			await config.set('apiName', 'exchangeRates');
 
-			console.log(chalk.green('\nDone! Now run `cash --help` to learn how to use this tool.\n'));
-			console.log(chalk.green('Remember, you can always change the API source, by running `cash --api`'));
+			
+			
 			process.exit(0);
 		}
 
@@ -110,15 +97,15 @@ if (options.api) {
 				await config.set('apiName', 'openExchangeRates');
 			}
 
-			console.log(chalk.green('\nDone! Now run `cash --help` to learn how to use this tool.\n'));
-			console.log(chalk.green('Remember, you can always change the API source, by running `cash --api`'));
+			
+			
 			process.exit(0);
 		}
 	})();
 } else if (argv.includes('--save') || argv.includes('-s')) {
 	config.set('defaultFrom', argv[1] || config.get('defaultFrom', 'USD'));
 	config.set('defaultTo', (argv.length > 2) ? process.argv.slice(4) : config.get('defaultTo', ['USD', 'EUR', 'GBP', 'PLN']));
-	console.log(chalk.green('Saved default currencies to ' + config.path));
+	
 	process.exit(0);
 } else {
 	cash(command);
